@@ -1,18 +1,14 @@
-package day_2;
+package Test;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import utils.CommonMethods;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
@@ -66,6 +62,9 @@ public class Day_4_Test extends CommonMethods {
         List<WebElement> allItems = driver.findElements(By.xpath("//*[@id=\"product_comparison\"]/tbody[1]"));
         int rowCount = allItems.size();
         System.out.println(rowCount);
+        for (WebElement itemsElements : allItems){
+            System.out.println(itemsElements.getText());
+        }
 
 
 /*

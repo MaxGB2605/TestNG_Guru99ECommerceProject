@@ -1,6 +1,7 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +13,8 @@ public class CommonMethods {
 
     @BeforeMethod(alwaysRun = true)
     public void startBrowser(){
-        driver = new FirefoxDriver();
+        driver =new ChromeDriver();
+       // driver = new FirefoxDriver();
         driver.get("http://live.techpanda.org/index.php/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -23,5 +25,7 @@ public class CommonMethods {
     public void tearDown() {
         driver.quit();
     }
+
+
 
 }
