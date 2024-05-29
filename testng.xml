@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Testing Google Apps">
-    <test name="Regression">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/Max/IdeaProjects/TestNG_Guru99ECommerceProject/src/test/java/Test">
         <classes>
-            <class name="day_2"/>
-
+            <class name="Test.Day_1_Test">
+                <methods>
+                    <include name="dashboardTest"/>
+                </methods>
+            </class>
+            <class name="Test.Day_2_Test">
+                <methods>
+                    <include name="mobilePageTest"/>
+                    <include name="costOfProductVerification"/>
+                </methods>
+            </class>
+            <class name="Test.Day_3_Test">
+                <methods>
+                    <include name="day3_Test"/>
+                </methods>
+            </class>
+            <class name="Test.Day_4_Test">
+                <methods>
+                    <include name="day4_Test"/>
+                </methods>
+            </class>
+            <class name="Test.Day_5_Test">
+                <methods>
+                    <include name="day5_Test"/>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
+            <class name="Test.Day_5_Test_Using_WindowsHandle">
+                <methods>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
+            <class name="Test.Day_6_Test">
+                <methods>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
         </classes>
-    </test> <!-- Test -->
-</suite> <!-- Suite -->
+    </test>
+</suite>

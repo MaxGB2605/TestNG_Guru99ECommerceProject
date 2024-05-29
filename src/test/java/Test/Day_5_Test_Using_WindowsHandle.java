@@ -8,55 +8,37 @@ import utils.CommonMethods;
 
 import java.time.Duration;
 
-
-public class Day_5_Test extends CommonMethods {
+public class Day_5_Test_Using_WindowsHandle extends CommonMethods {
 
     private String firstName = "John";
     private String lastName = "Doe";
     private String email = "john@doe.com";
     private String password = "password";
 
-    @Test
-    public void day5_Test() throws InterruptedException {
-
-        //2. Click on my account link
-        driver.findElement(By.xpath("(//*[@class='label'])[3]")).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        driver.findElement(By.linkText("My Account")).click();
-//3. Click create account link and fill new user information
-        WebElement createAccountBtn = driver.findElement(By.xpath("//*[@title = 'Create an Account']"));
-        createAccountBtn.click();
-
-        driver.findElement(By.id("firstname")).clear();
-        driver.findElement(By.id("firstname")).sendKeys(firstName);
-
-        driver.findElement(By.id("lastname")).clear();
-        driver.findElement(By.id("lastname")).sendKeys(lastName);
-
-        driver.findElement(By.id("email_address")).clear();
-        driver.findElement(By.id("email_address")).sendKeys(email);
-
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(password);
-
-        driver.findElement(By.id("confirmation")).clear();
-        driver.findElement(By.id("confirmation")).sendKeys(password);
-
-        //4. Click register
-        driver.findElement(By.xpath("(//*[@title = 'Register'])[2]")).click();
-
-
-    }
-
 
     @Test
     public void loginTest() {
 
 // Continue to check the user created and verify messages, as system doesn't allow duplicates
-        //Click on my account and login
+        //Get current window id
+        String originalWindow = driver.getWindowHandle();
+        System.out.println("Original window id is: "+originalWindow);
+
+        //2. Click on my account
         driver.findElement(By.xpath("(//*[@class='label'])[3]")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        //Switch to new window
+        for (String windowHandle : driver.getWindowHandles()){
+            driver.switchTo().window(windowHandle);
+            System.out.println("New window id is : "+windowHandle);
+            if (originalWindow.equals(windowHandle)) {
+                System.out.println("Main and drop window id equal");
+            }else {
+                System.out.println("Main and drop window id not equal");
+            }
+        }
+
 
         driver.findElement(By.linkText("My Account")).click();
 
@@ -74,8 +56,22 @@ public class Day_5_Test extends CommonMethods {
         System.out.println("Actual message is: " + actualWelcomeMessage + ". Expected message is : " + expectedWelcomeMessage);
         Assert.assertEquals(actualWelcomeMessage, expectedWelcomeMessage, "Message don't match");
 
+        //Get dashboard window id
+        String dashboardWindow = driver.getWindowHandle();
+        System.out.println("Dashboard window id is: "+dashboardWindow);
+
         //6. Go to tv menu
         driver.findElement(By.xpath("//a[normalize-space()='TV']")).click();
+
+        //Switch to new window
+        for (String tvWindowHandle : driver.getWindowHandles()){
+            driver.switchTo().window(tvWindowHandle);
+            if (dashboardWindow.equals(tvWindowHandle)) {
+                System.out.println("Dashboard and tv page id equal");
+            }else {
+                System.out.println("Dashboard and tv page id not equal");
+            }
+        }
 
         //7. Add LG LCD to wish list
         driver.findElement(By.xpath("(//*[@class='link-wishlist'])[1]")).click();

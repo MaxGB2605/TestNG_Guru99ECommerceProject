@@ -31,8 +31,7 @@ public class Day_4_Test extends CommonMethods {
         System.out.println("Second phone added - " + phone2AddedMsg);
 
 
-
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         //Store the ID of the original window
         String originalWindow = driver.getWindowHandle();
 
@@ -47,7 +46,7 @@ public class Day_4_Test extends CommonMethods {
 
 //Loop through until we find a new window handle
         for (String windowHandle : driver.getWindowHandles()) {
-            if(!originalWindow.contentEquals(windowHandle)) {
+            if (!originalWindow.contentEquals(windowHandle)) {
                 driver.switchTo().window(windowHandle);
                 break;
             }
@@ -55,14 +54,14 @@ public class Day_4_Test extends CommonMethods {
         WebElement element = driver.findElement(By.xpath("//*[@id=\"top\"]/body/div/div[1]/h1"));
         System.out.println(element.getText());
         String expectedHeading = "COMPARE PRODUCTS";
-        String actualHeading=driver.findElement(By.xpath("//*[@class = 'page-title title-buttons']/h1")).getText();
-       Assert.assertEquals(actualHeading,expectedHeading,"Heading don't match");
+        String actualHeading = driver.findElement(By.xpath("//*[@class = 'page-title title-buttons']/h1")).getText();
+        Assert.assertEquals(actualHeading, expectedHeading, "Heading don't match");
 
         //get the list of added items to compare and verify
         List<WebElement> allItems = driver.findElements(By.xpath("//*[@id=\"product_comparison\"]/tbody[1]"));
         int rowCount = allItems.size();
         System.out.println(rowCount);
-        for (WebElement itemsElements : allItems){
+        for (WebElement itemsElements : allItems) {
             System.out.println(itemsElements.getText());
         }
 

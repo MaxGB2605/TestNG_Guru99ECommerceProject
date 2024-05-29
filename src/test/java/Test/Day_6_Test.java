@@ -8,58 +8,31 @@ import utils.CommonMethods;
 
 import java.time.Duration;
 
+public class Day_6_Test extends CommonMethods {
+    //Verify user is able to purchase product using registered email id
+    //Use Chrome Browser
 
-public class Day_5_Test extends CommonMethods {
-
-    private String firstName = "John";
-    private String lastName = "Doe";
     private String email = "john@doe.com";
     private String password = "password";
-
-    @Test
-    public void day5_Test() throws InterruptedException {
-
-        //2. Click on my account link
-        driver.findElement(By.xpath("(//*[@class='label'])[3]")).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        driver.findElement(By.linkText("My Account")).click();
-//3. Click create account link and fill new user information
-        WebElement createAccountBtn = driver.findElement(By.xpath("//*[@title = 'Create an Account']"));
-        createAccountBtn.click();
-
-        driver.findElement(By.id("firstname")).clear();
-        driver.findElement(By.id("firstname")).sendKeys(firstName);
-
-        driver.findElement(By.id("lastname")).clear();
-        driver.findElement(By.id("lastname")).sendKeys(lastName);
-
-        driver.findElement(By.id("email_address")).clear();
-        driver.findElement(By.id("email_address")).sendKeys(email);
-
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(password);
-
-        driver.findElement(By.id("confirmation")).clear();
-        driver.findElement(By.id("confirmation")).sendKeys(password);
-
-        //4. Click register
-        driver.findElement(By.xpath("(//*[@title = 'Register'])[2]")).click();
-
-
-    }
+    private String country = "United States";
+    private String state = "New York";
+    private int zipCode = 542896;
+    private String address = "ABC";
+    private String city = "New York";
+    private String phone = "12345678";
 
 
     @Test
     public void loginTest() {
 
-// Continue to check the user created and verify messages, as system doesn't allow duplicates
-        //Click on my account and login
+
+        //2. Click on my account
         driver.findElement(By.xpath("(//*[@class='label'])[3]")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.linkText("My Account")).click();
 
+        //3. Login in application using previously created email
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(email);
 
@@ -67,6 +40,43 @@ public class Day_5_Test extends CommonMethods {
         driver.findElement(By.id("pass")).sendKeys(password);
 
         driver.findElement(By.id("send2")).click();
+
+        //Get current page id
+        String currentWindowHandle = driver.getWindowHandle();
+        System.out.println("Current window id is : " + currentWindowHandle);
+
+        //4. Click on MY WISHLIST link
+        driver.findElement(By.xpath("//*[text()='My Wishlist']")).click();
+
+        //Switching to next page using window handle
+        for (String windowHandle : driver.getWindowHandles()) {
+            driver.switchTo().window(windowHandle);
+            if (currentWindowHandle.equals(windowHandle)) {
+                System.out.println("Dashboard window and My Wishlist window id are equal");
+            } else {
+                System.out.println("Dashboard window and My Wishlist window id are not equal");
+            }
+        }
+
+        //5. Click add to cart
+        driver.findElement(By.xpath("//*[@title='Add to Cart']")).click();
+
+
+        //6. Click proceed to checkout
+        driver.findElement(By.xpath("(//*[@title='Proceed to Checkout'])[1]")).click();
+
+        //7. Enter shipping info
+        driver.findElement(By.id("billing:street1")).clear();
+        driver.findElement(By.id("billing:street1")).sendKeys(address);  //enter address
+
+        driver.findElement(By.id("billing:street1")).clear();
+        driver.findElement(By.id("billing:street1")).sendKeys(city);  //enter city
+
+
+
+
+
+
 
         //5. Verify registration is done
         String actualWelcomeMessage = driver.findElement(By.className("welcome-msg")).getText();

@@ -7,10 +7,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.CommonMethods;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Day_1_Test extends CommonMethods {
 
