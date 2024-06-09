@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.CommonMethods;
 
-public class Day_3_Test extends CommonMethods {
+public class Day3Test extends CommonMethods {
    /*
     public static WebDriver driver;
 
@@ -21,7 +21,7 @@ public class Day_3_Test extends CommonMethods {
     */
 
     @Test(priority = 1)
-    public void day3_Test() {
+    public void day3Test() {
         WebElement mobileButton = driver.findElement(By.xpath("//*[@id=\"nav\"]/ol/li[1]/a"));
         mobileButton.click();
         driver.findElement(By.xpath("(//*[@title='Add to Cart'])[3]")).click();
