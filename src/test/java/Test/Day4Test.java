@@ -12,11 +12,11 @@ import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
-public class Day_4_Test extends CommonMethods {
+public class Day4Test extends CommonMethods {
 
 
     @Test(priority = 1)
-    public void day4_Test() {
+    public void day4Test() {
         WebElement mobileButton = driver.findElement(By.xpath("//*[@id=\"nav\"]/ol/li[1]/a"));
         mobileButton.click();
 

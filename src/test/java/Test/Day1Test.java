@@ -2,13 +2,12 @@ package Test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.CommonMethods;
 
 
-public class Day_1_Test extends CommonMethods {
+public class Day1Test extends CommonMethods {
 
 
     @Test

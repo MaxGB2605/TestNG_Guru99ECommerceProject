@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import utils.CommonMethods;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day_2_Test extends CommonMethods {
+public class git add .Day2Test extends CommonMethods {
 
 
 

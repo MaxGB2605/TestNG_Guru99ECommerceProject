@@ -1,38 +1,46 @@
 package Test;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.CommonMethods;
 
 import java.time.Duration;
 
-public class Day_6_Test extends CommonMethods {
-    //Verify user is able to purchase product using registered email id
-    //Use Chrome Browser
+public class Day5TestUsingWindowsHandle extends CommonMethods {
 
+    private String firstName = "John";
+    private String lastName = "Doe";
     private String email = "john@doe.com";
     private String password = "password";
-    private String country = "United States";
-    private String state = "New York";
-    private int zipCode = 542896;
-    private String address = "ABC";
-    private String city = "New York";
-    private String phone = "12345678";
 
 
     @Test
-    public void loginTest() {
+    public void test5() {
 
+// Continue to check the user created and verify messages, as system doesn't allow duplicates
+        //Get current window id
+        String originalWindow = driver.getWindowHandle();
+        System.out.println("Original window id is: "+originalWindow);
 
         //2. Click on my account
         driver.findElement(By.xpath("(//*[@class='label'])[3]")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
+        //Switch to new window
+        for (String windowHandle : driver.getWindowHandles()){
+            driver.switchTo().window(windowHandle);
+            System.out.println("New window id is : "+windowHandle);
+            if (originalWindow.equals(windowHandle)) {
+                System.out.println("Main and drop window id equal");
+            }else {
+                System.out.println("Main and drop window id not equal");
+            }
+        }
+
+
         driver.findElement(By.linkText("My Account")).click();
 
-        //3. Login in application using previously created email
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(email);
 
@@ -41,51 +49,28 @@ public class Day_6_Test extends CommonMethods {
 
         driver.findElement(By.id("send2")).click();
 
-        //Get current page id
-        String currentWindowHandle = driver.getWindowHandle();
-        System.out.println("Current window id is : " + currentWindowHandle);
-
-        //4. Click on MY WISHLIST link
-        driver.findElement(By.xpath("//*[text()='My Wishlist']")).click();
-
-        //Switching to next page using window handle
-        for (String windowHandle : driver.getWindowHandles()) {
-            driver.switchTo().window(windowHandle);
-            if (currentWindowHandle.equals(windowHandle)) {
-                System.out.println("Dashboard window and My Wishlist window id are equal");
-            } else {
-                System.out.println("Dashboard window and My Wishlist window id are not equal");
-            }
-        }
-
-        //5. Click add to cart
-        driver.findElement(By.xpath("//*[@title='Add to Cart']")).click();
-
-
-        //6. Click proceed to checkout
-        driver.findElement(By.xpath("(//*[@title='Proceed to Checkout'])[1]")).click();
-
-        //7. Enter shipping info
-        driver.findElement(By.id("billing:street1")).clear();
-        driver.findElement(By.id("billing:street1")).sendKeys(address);  //enter address
-
-        driver.findElement(By.id("billing:street1")).clear();
-        driver.findElement(By.id("billing:street1")).sendKeys(city);  //enter city
-
-
-
-
-
-
-
         //5. Verify registration is done
         String actualWelcomeMessage = driver.findElement(By.className("welcome-msg")).getText();
         String expectedWelcomeMessage = "WELCOME, JOHN DOE!";
         System.out.println("Actual message is: " + actualWelcomeMessage + ". Expected message is : " + expectedWelcomeMessage);
         Assert.assertEquals(actualWelcomeMessage, expectedWelcomeMessage, "Message don't match");
 
+        //Get dashboard window id
+        String dashboardWindow = driver.getWindowHandle();
+        System.out.println("Dashboard window id is: "+dashboardWindow);
+
         //6. Go to tv menu
         driver.findElement(By.xpath("//a[normalize-space()='TV']")).click();
+
+        //Switch to new window
+        for (String tvWindowHandle : driver.getWindowHandles()){
+            driver.switchTo().window(tvWindowHandle);
+            if (dashboardWindow.equals(tvWindowHandle)) {
+                System.out.println("Dashboard and tv page id equal");
+            }else {
+                System.out.println("Dashboard and tv page id not equal");
+            }
+        }
 
         //7. Add LG LCD to wish list
         driver.findElement(By.xpath("(//*[@class='link-wishlist'])[1]")).click();
